@@ -2,8 +2,16 @@
 
 [xml-writer](http://github.com/bpoweski/xml-writer) generates XML using StAX in a manner compatible with [clojure.data.xml](http://github.com/clojure/clojure.data.xml) but with lower overhead.
 
+* Emits XML from Clojure data structures
+* No additional dependencies if using 1.6
+* Uses StAX internally
+
 ## Usage
 
+### Leiningen
+Add the following to the `project.clj` dependencies:
+
+    [xml-writer "0.1.1"]
 
 ## Benchmarks
 
