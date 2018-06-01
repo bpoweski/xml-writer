@@ -3,13 +3,15 @@
   :url "http://github.com/bpoweski/xml-writer"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.5.1"]]
-  :profiles {:dev {:dependencies [[midje "1.5.1"]
-                                  [org.clojure/data.xml "0.0.6"]
-                                  [perforate "0.3.2"]]
-                   :plugins [[lein-midje "2.0.3"]
-                             [perforate "0.3.2"]]}
+  :dependencies [[org.clojure/clojure "1.9.0"]
+                 [com.fasterxml.woodstox/woodstox-core "5.1.0"]
+                 [org.clojure/data.xml "0.0.8"]]
+  :profiles {:dev {:dependencies [[midje "1.9.1"]
+                                  [perforate "0.3.4"]]
+                   :plugins [[lein-midje "3.1.1"]
+                             [perforate "0.3.4"]]}
              :bench {:jvm-opts  ^:replace []}}
   :perforate {:environments [{:name :current
                               :profiles [:dev :bench]
-                              :namespaces [xml-writer.emit]}]})
+                              :namespaces [xml-writer.room-avail]}]}
+  :repositories [["sonatype-oss-public" "https://oss.sonatype.org/content/groups/public/"]])

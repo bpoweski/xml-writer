@@ -7,8 +7,7 @@
 (defn data-xml [sexp]
   (xml/emit-str (xml/sexp-as-element sexp)))
 
-(def compatible? (chatty-checker [sexp] (= (emit-sexp-str sexp)
-                                           (data-xml sexp))))
+(def compatible? (chatty-checker [sexp] (= (xml/parse-str (emit-sexp-str sexp)) (xml/parse-str (data-xml sexp)))))
 
 (facts "emitting one element"
   [:root] => compatible?
@@ -22,8 +21,7 @@
 
 (facts "with attributes"
   [:root {:a 1}] => compatible?
-  [:root {:a 1} nil] => compatible?
-  [:root {:xsi:nil true}] => compatible?)
+  [:root {:a 1} nil] => compatible?)
 
 (facts "emitting child elements"
   [:root [:child {} "foo"]] => compatible?
@@ -31,4 +29,3 @@
 
 (facts "emitting object values"
   [:root 20.0M] => compatible?)
-
