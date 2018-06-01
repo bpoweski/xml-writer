@@ -1,4 +1,4 @@
 language: clojure
-script: "lein2 midje"
+script: "lein midje"
 jdk:
-  - oraclejdk7
+  - openjdk8
