@@ -29,3 +29,13 @@
 
 (facts "emitting object values"
   [:root 20.0M] => compatible?)
+
+(facts "emitting xml string despite invalid input characters"
+  (emit-sexp-str
+   [:root [:child {:attribute "value"} "Some text\u0000more text"]]
+   :invalid-char-behavior :replace-all :replacement-char (char \;)) =>
+  "<?xml version='1.0' encoding='UTF-8'?><root><child attribute=\"value\">Some text;more text</child></root>"
+  (emit-sexp-str
+   [:root [:child {:attribute "value"} "Some text\u0001more text"]]
+   :invalid-char-behavior :replace-whitespace) =>
+  "<?xml version='1.0' encoding='UTF-8'?><root><child attribute=\"value\">Some text more text</child></root>")
