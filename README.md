@@ -99,6 +99,13 @@ user> (xml/emit-sexp-str [:root {:xmlns:xsi "http://www.w3.org/2001/XMLSchema-in
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?><root xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><child xsi:nil=\"true\"></child></root>"
 ```
 
+With `:invalid-char-behavior` option. Supports `:fail`, `:replace-all`, and `replace-whitespace`. If no option is supplied, defaults to Woodstox failing handler.
+
+```clojure
+user> (xml/emit-sexp-str [:root "value1\u001Cvalue2"] :invalid-char-behavior :replace-whitespace)
+"<?xml version='1.0' encoding='UTF-8'?><root>value1 value2</root>"
+```
+
 ## TODO
 
 - [ ] use empty elements when values are nil [:elem {} nil] -> <elem />
